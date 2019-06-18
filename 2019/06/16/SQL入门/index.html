@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>SQL入门 | Huan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简介SQL是什么SQL: 结构化查询语言（Structured Query Language），是用于访问和处理数据库的标准语言，也是一种ANSI（American National Standard Institute 美国国家标准组织）标准的计算机语言。但是SQL仍然存在多种不同版本，大部分SQL数据库程序都有它们自己的专业扩展。 本文主要使用MySQL的语法进行示例。 SQL能做什么SQL可">
+<meta name="keywords" content="SQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL入门">
+<meta property="og:url" content="https://huanw415.github.io/2019/06/16/SQL入门/index.html">
+<meta property="og:site_name" content="Huan&#39;s Blog">
+<meta property="og:description" content="简介SQL是什么SQL: 结构化查询语言（Structured Query Language），是用于访问和处理数据库的标准语言，也是一种ANSI（American National Standard Institute 美国国家标准组织）标准的计算机语言。但是SQL仍然存在多种不同版本，大部分SQL数据库程序都有它们自己的专业扩展。 本文主要使用MySQL的语法进行示例。 SQL能做什么SQL可">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://huanw415.github.io/2019/06/16/SQL入门/orderby.jpg">
+<meta property="og:image" content="https://huanw415.github.io/2019/06/16/SQL入门/sql-join.png">
+<meta property="og:updated_time" content="2019-06-16T10:15:49.678Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL入门">
+<meta name="twitter:description" content="简介SQL是什么SQL: 结构化查询语言（Structured Query Language），是用于访问和处理数据库的标准语言，也是一种ANSI（American National Standard Institute 美国国家标准组织）标准的计算机语言。但是SQL仍然存在多种不同版本，大部分SQL数据库程序都有它们自己的专业扩展。 本文主要使用MySQL的语法进行示例。 SQL能做什么SQL可">
+<meta name="twitter:image" content="https://huanw415.github.io/2019/06/16/SQL入门/orderby.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Huan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Huan&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://huanw415.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-SQL入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/16/SQL入门/" class="article-date">
+  <time datetime="2019-06-16T10:09:49.445Z" itemprop="datePublished">2019-06-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SQL入门
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="SQL是什么"><a href="#SQL是什么" class="headerlink" title="SQL是什么"></a>SQL是什么</h2><p>SQL: 结构化查询语言（Structured Query Language），是用于访问和处理数据库的标准语言，<br>也是一种ANSI（American National Standard Institute 美国国家标准组织）标准的计算机语言。<br>但是<code>SQL仍然存在多种不同版本，大部分SQL数据库程序都有它们自己的专业扩展</code>。
+本文主要使用MySQL的语法进行示例。</p>
+<h2 id="SQL能做什么"><a href="#SQL能做什么" class="headerlink" title="SQL能做什么"></a>SQL能做什么</h2><p>SQL可用于</p>
+<ol>
+<li>创建数据库</li>
+<li>在数据库中创建表、创建存储过程、创建视图</li>
+<li>在数据库中设置表、存储过程和视图的权限</li>
+<li>面向数据库执行 增/删/改/查操作</li>
+</ol>
+<h1 id="SQL基本语法"><a href="#SQL基本语法" class="headerlink" title="SQL基本语法"></a>SQL基本语法</h1><p>在学习和使用SQL之前，首先声明：<code>SQL对大小写不敏感，SELECT和select是一样的</code>，所以不要命名时，不要通过大小写区分。</p>
+<h2 id="数据库级别操作"><a href="#数据库级别操作" class="headerlink" title="数据库级别操作"></a>数据库级别操作</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>使用<code>CREATE DATABASE</code>来创建数据库。e.g 创建一个名为<code>example</code>的数据库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE DATABASE example</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><p>通过<code>ALTER DATABASE</code>来修改数据库</p>
+<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><p>通过<code>DROP DATABASE database_name</code>来删除数据库</p>
+<h3 id="选择-设置数据库"><a href="#选择-设置数据库" class="headerlink" title="选择/设置数据库"></a>选择/设置数据库</h3><p>选择名为<code>example</code>的数据库，并将其字符集设置为<code>utf8</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use example;</span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line">mysql&gt; set names utf8;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h2 id="表（Table）级别操作"><a href="#表（Table）级别操作" class="headerlink" title="表（Table）级别操作"></a>表（Table）级别操作</h2><p>每个数据库(database)中可由多张表组成(table)组成，表中的每一行都是一条数据记录，每一列都是一个属性。</p>
+<h3 id="创建-CREATE-TABLE"><a href="#创建-CREATE-TABLE" class="headerlink" title="创建 CREATE TABLE"></a>创建 CREATE TABLE</h3><p>使用<code>CREATE TABLE</code>来创建数据库中的表，表有行和列组成，每个表都有唯一的表名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE table_name      </span><br><span class="line">(</span><br><span class="line">  column_name1 data_type(size),</span><br><span class="line">  column_name2 data_type(size),</span><br><span class="line">  column_name3 data_type(size),</span><br><span class="line">  ...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>举例说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE Websites</span><br><span class="line">(</span><br><span class="line">  name varchar(255),</span><br><span class="line">  url varchar(255),</span><br><span class="line">  country varchr(255)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询表"><a href="#查询表" class="headerlink" title="查询表"></a>查询表</h3><p>查询数据库中所有的表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW TABLES;</span><br></pre></td></tr></table></figure>
+
+<p>查询表的结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; DESC table_name;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改-ALTER-TABLE"><a href="#修改-ALTER-TABLE" class="headerlink" title="修改 ALTER TABLE"></a>修改 ALTER TABLE</h3><h4 id="增加-刪除列"><a href="#增加-刪除列" class="headerlink" title="增加/刪除列"></a>增加/刪除列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE table_name ADD column_name datatype</span><br><span class="line">mysql&gt; ALTER TABLE table_name Drop column_name</span><br></pre></td></tr></table></figure>
+
+<h4 id="改变表中列的数据类型"><a href="#改变表中列的数据类型" class="headerlink" title="改变表中列的数据类型"></a>改变表中列的数据类型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE table_name MODIFY COLUMN column_name data_type</span><br></pre></td></tr></table></figure>
+
+<h2 id="表内数据（row）级别操作"><a href="#表内数据（row）级别操作" class="headerlink" title="表内数据（row）级别操作"></a>表内数据（row）级别操作</h2><h3 id="增删改查CURD（create-update-retrieve-delete）"><a href="#增删改查CURD（create-update-retrieve-delete）" class="headerlink" title="增删改查CURD（create, update, retrieve, delete）"></a>增删改查CURD（create, update, retrieve, delete）</h3><h4 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; INSERT INTO table_name (column_1, column_2, column_3)</span><br><span class="line">     &gt;    VALUES(value_1, value_2, value_3);</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; DELETE FROM table_name WHERE some_column=some_value;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改-1"><a href="#修改-1" class="headerlink" title="修改"></a>修改</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; UPDATE table_name</span><br><span class="line">     &gt;      SET column_1=value_1, column_2=value_2, column_3=value_3</span><br><span class="line">     &gt; WHERE some_column=some_value;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT column_name_1, column_name_2, column_name_3 FROM table_name</span><br></pre></td></tr></table></figure>
+
+<p>随着内部拼车服务的进一步提升，隐私声明的内容会随时更新。更新后的隐私声明一旦在网页上公布即有效代替原来的隐私声明。</p>
+<h1 id="SQL中的函数"><a href="#SQL中的函数" class="headerlink" title="SQL中的函数"></a>SQL中的函数</h1><p>SQL中有很多可用于计数和计算的内部函数</p>
+<h2 id="SQL-Aggregate-函数"><a href="#SQL-Aggregate-函数" class="headerlink" title="SQL Aggregate 函数"></a>SQL Aggregate 函数</h2><p>计算从列中取得的值，返回一个单一值</p>
+<h3 id="AVG-返回平均值"><a href="#AVG-返回平均值" class="headerlink" title="AVG 返回平均值"></a>AVG 返回平均值</h3><p>计算<code>access_log</code>中<code>count</code>这一列的平均值作为<code>CountAverage</code>返回。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT AVG(count) AS CountAverage FROM access_log;</span><br></pre></td></tr></table></figure>
+
+<h3 id="COUNT-返回匹配指定条件的条数"><a href="#COUNT-返回匹配指定条件的条数" class="headerlink" title="COUNT 返回匹配指定条件的条数"></a>COUNT 返回匹配指定条件的条数</h3><h4 id="COUNT-column-name"><a href="#COUNT-column-name" class="headerlink" title="COUNT(column_name)"></a>COUNT(column_name)</h4><p>指定列的值的数目（NULL）不计入其中</p>
+<h4 id="COUNT"><a href="#COUNT" class="headerlink" title="COUNT(*)"></a>COUNT(*)</h4><p>返回表中的记录数</p>
+<h4 id="COUNT-DISTINCT-column-name"><a href="#COUNT-DISTINCT-column-name" class="headerlink" title="COUNT(DISTINCT column_name)"></a>COUNT(DISTINCT column_name)</h4><p>返回指定列中不同值的数目</p>
+<h3 id="MAX-MIN-返回某列最大-小值"><a href="#MAX-MIN-返回某列最大-小值" class="headerlink" title="MAX/MIN 返回某列最大/小值"></a>MAX/MIN 返回某列最大/小值</h3><h3 id="SUM-返回某列的值得总和"><a href="#SUM-返回某列的值得总和" class="headerlink" title="SUM 返回某列的值得总和"></a>SUM 返回某列的值得总和</h3><h2 id="SQL-Scalar函数"><a href="#SQL-Scalar函数" class="headerlink" title="SQL Scalar函数"></a>SQL Scalar函数</h2><p>基于输入值，返回一个单一值</p>
+<h3 id="UCASE-LCASE-column-name-把字段转为大写-小写"><a href="#UCASE-LCASE-column-name-把字段转为大写-小写" class="headerlink" title="UCASE/LCASE(column_name) 把字段转为大写/小写"></a>UCASE/LCASE(column_name) 把字段转为大写/小写</h3><h3 id="MID-column-name-start-length-从文本中提取字符"><a href="#MID-column-name-start-length-从文本中提取字符" class="headerlink" title="MID(column_name, start[, length]) 从文本中提取字符"></a>MID(column_name, start[, length]) 从文本中提取字符</h3><p>其中<code>column_name</code>为提取字符的字段，<code>start</code>规定开始提取的位置（起始值为1），length为可选参数，指定要返回的字符数，如果省略的话则默认返回剩余文本。</p>
+<h3 id="LENGTH-column-name"><a href="#LENGTH-column-name" class="headerlink" title="LENGTH(column_name)"></a>LENGTH(column_name)</h3><p>返回文本字段的长度</p>
+<h3 id="ROUND-column-name-decimals"><a href="#ROUND-column-name-decimals" class="headerlink" title="ROUND(column_name, decimals)"></a>ROUND(column_name, decimals)</h3><p>将指定字段四舍五入为指定的小数位</p>
+<h3 id="FORMAT-column-name-format"><a href="#FORMAT-column-name-format" class="headerlink" title="FORMAT(column_name, format)"></a>FORMAT(column_name, format)</h3><p>对字段显示进行格式化</p>
+<h1 id="SQL高级应用"><a href="#SQL高级应用" class="headerlink" title="SQL高级应用"></a>SQL高级应用</h1><h2 id="结果集的处理"><a href="#结果集的处理" class="headerlink" title="结果集的处理"></a>结果集的处理</h2><h3 id="排序：ORDER-BY-关键字"><a href="#排序：ORDER-BY-关键字" class="headerlink" title="排序：ORDER BY 关键字"></a>排序：ORDER BY 关键字</h3><p>可对结果集按照一列或多列进行升序或者降序排列。<br>默认按照<code>升序ASC</code>排列，需要进行<code>降序</code>排序时，可使用关键字<code>DESC</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM table_name ORDER BY column_1 ASC|DESC, column_2 ASC|DESC;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/06/16/SQL入门/orderby.jpg" alt="排序后的查询结果"></p>
+<h4 id="去重：DISTINCT-关键字"><a href="#去重：DISTINCT-关键字" class="headerlink" title="去重：DISTINCT 关键字"></a>去重：DISTINCT 关键字</h4><p>有时表中一列会有多个重复值，使用<code>SELECT DISTINCT</code> 可返回唯一不同值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; DISTINCT column_name,column_name</span><br><span class="line">          FROM table_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Where中可用的运算符"><a href="#Where中可用的运算符" class="headerlink" title="Where中可用的运算符"></a>Where中可用的运算符</h2><h3 id="AND-OR-运算符"><a href="#AND-OR-运算符" class="headerlink" title="AND/OR 运算符"></a>AND/OR 运算符</h3><p>使用这两个运算符可以应用一个以上的条件对结果进行过滤</p>
+<h3 id="基本运算符"><a href="#基本运算符" class="headerlink" title="基本运算符"></a>基本运算符</h3><p><code>=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code> <code>&lt;&gt;</code>或者<code>!=</code></p>
+<h3 id="LIKE-模式搜索"><a href="#LIKE-模式搜索" class="headerlink" title="LIKE 模式搜索"></a>LIKE 模式搜索</h3><p>查找<code>column_name</code>满足一个<code>pattern</code>的数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;</span><br></pre></td></tr></table></figure>
+
+<p>可以通过使用一些<code>通配符</code>来实现<code>pattern</code>，其中可用的通配符有一下集中<br>| 通配符     | 描述     |<br>| :————- | :————- |<br>| %       | 替代0或多个字符      |<br>| _       | 替1个字符      |<br>|[charlist]  | 匹配charlist里的任意字符      |<br>|[^charlist]或[!charlist]  | 不匹配charlist里的任意字符      |<br>其中<code>%</code>和<code>_</code>均可和<code>LIKE</code>一起使用，<code>[charlist]</code>和<code>[^charlist]</code>和<code>REGEXP</code>正则一起搭配使用。<br>而且， <code>LIKE</code>和<code>REGEXP</code>均可以和<code>NOT</code>一起搭配使用，表示否定。</p>
+<p>举个栗子：<br><code>WHERE name LIKE %oo%</code>就是找到所有名字里有<code>oo</code>的数据</p>
+<h3 id="IN-匹配多个可能值"><a href="#IN-匹配多个可能值" class="headerlink" title="IN 匹配多个可能值"></a>IN 匹配多个可能值</h3><p>允许WHERE子句中规定多个值，可与<code>NOT</code>连用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT column_name(s) FROM table_name WHERE column_name IN (value1,value2,...);</span><br></pre></td></tr></table></figure>
+
+<h3 id="BETWEEN-匹配某个范围"><a href="#BETWEEN-匹配某个范围" class="headerlink" title="BETWEEN 匹配某个范围"></a>BETWEEN 匹配某个范围</h3><p>允许选取两个值之间的数据范围，这些值可以是数值、文本或者日期，可与<code>NOT</code>连用</p>
+<h2 id="JOIN-多表"><a href="#JOIN-多表" class="headerlink" title="JOIN 多表"></a>JOIN 多表</h2><p>SQL join可将两个或者多个表的行结合起来。下图里是<code>LEFT JOIN</code>，<code>RIGHT JOIN</code>， <code>INNER JOIN</code>和<code>OUT JOIN</code>的其中用法。<br><img src="/2019/06/16/SQL入门/sql-join.png" alt="join多表"></p>
+<h3 id="INNER-JOIN"><a href="#INNER-JOIN" class="headerlink" title="INNER JOIN"></a>INNER JOIN</h3><p><code>A INNOER JOIN B</code>当且仅当在B中找到和A匹配的数据时，该条数据才会被返回。</p>
+<h3 id="LEFT-JOIN"><a href="#LEFT-JOIN" class="headerlink" title="LEFT JOIN"></a>LEFT JOIN</h3><p><code>A LEFT JOIN B</code>：表示从左表<code>A</code>中返回所有的行，即使右表<code>B</code>中没有没有任何数据匹配。如果右表没有数据匹配则返回NULL。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM table_a a</span><br><span class="line">                    LEFT JOIN table_b b ON a.key = b.key</span><br><span class="line">                WHERE b.key=NULL</span><br></pre></td></tr></table></figure>
+
+<p><code>LEFT JOIN table_b b ON a.key = b.key</code>按照a表返回数据，即使在b表中找不到对应值，再使用<code>b.key=NULL</code>就可以滤除a中能在b表中找  到对应值的行，符合上图第二行左边第一个图的结果。</p>
+<h3 id="RIGHT-JOIN"><a href="#RIGHT-JOIN" class="headerlink" title="RIGHT JOIN"></a>RIGHT JOIN</h3><p><code>A RIGHT JOIN B</code>：表示从右表<code>B</code>中返回所有的行，即使左表<code>A</code>中没有没有任何数据匹配。如果左表没有数据匹配则返回NULL。</p>
+<h3 id="OUTER-JOIN"><a href="#OUTER-JOIN" class="headerlink" title="OUTER JOIN"></a>OUTER JOIN</h3><p><code>A OUTER JOIN B</code>: 表示只要左表<code>A</code>或者右表<code>B</code>中任意一个表中存在，则返回该行数据。</p>
+<h2 id="SQL-约束（constraints）"><a href="#SQL-约束（constraints）" class="headerlink" title="SQL 约束（constraints）"></a>SQL 约束（constraints）</h2><p>用于规定表中的数据规则。如果存在违反约束的数据行为，行为会被约束终止。<br>在SQL中有的约束如下：</p>
+<ol>
+<li>NOT NULL: 不能存储为NULL的值</li>
+<li>UNIQUE: 保证某列的每行必须有惟一值</li>
+<li>PRIMARY KEY: 是NOT NULL 和UNIQUE的结合。确保某列（或两个列多个列的结合）有唯一标识，有助于快速检索某个特定记录</li>
+<li>FOREIGN KEY: 保证一个表中的数据和另一个表中的值得参照完整性</li>
+<li>CHECK：保证列中的值符合指定条件</li>
+<li>DEFAULT：规定没有给列赋值时的默认值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE table_name</span><br><span class="line">&#123;</span><br><span class="line">  column_1 datatype(size) constraint_name,</span><br><span class="line">  column_2 datatype(size) constraint_name,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>注意：每个表可以有多个UNIQUE约束，但是每个表只能有一个PRIMARY KEY约束</p>
+</blockquote>
+<h3 id="PRIMARY-KEY"><a href="#PRIMARY-KEY" class="headerlink" title="PRIMARY KEY"></a>PRIMARY KEY</h3><p>PRIMARY KEY唯一标识数据库的每条记录。每个表都应该有一个主键，并且有且仅有一个，且不能为NULL。<br>定义多列作为联合主键时，可用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONSTRAINT primary_key_name PRIMARY KEY (column_1, column_2, ...)</span><br></pre></td></tr></table></figure>
+
+<h3 id="FOREIGN-KEY"><a href="#FOREIGN-KEY" class="headerlink" title="FOREIGN KEY"></a>FOREIGN KEY</h3><p>一个表中的FOREIGN KEY指向另一个表中的UNIQUE KEY(唯一约束的键)。<br>可用于预防破坏表之间的连接行为，也可以防止非法数据插入外键列，因为他必须是指向的那个表中的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONSTRAINT fk_PerOrders FOREIGN KEY (P_Id) REFERENCES Persons(P_Id)</span><br></pre></td></tr></table></figure>
+
+<p>将<code>fk_PerOrders</code>指定为外键，指向<code>Persons</code>表中的<code>P_Id</code>列。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://huanw415.github.io/2019/06/16/SQL入门/" data-id="cjx1847a6000c88pfpabc6wns" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/">SQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/18/数据库的事务/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          数据库的事务
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/31/jquery-中bind-live-delegate-on事件绑定方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">jquery 中bind, live, delegate, on事件绑定方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/开发/">开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/开发/前端/">前端</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Transaction/">Transaction</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Transaction/" style="font-size: 10px;">Transaction</a> <a href="/tags/jQuery/" style="font-size: 10px;">jQuery</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/18/数据库的事务/">数据库的事务</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/16/SQL入门/">SQL入门</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/31/jquery-中bind-live-delegate-on事件绑定方法/">jquery 中bind, live, delegate, on事件绑定方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 HuanW<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
