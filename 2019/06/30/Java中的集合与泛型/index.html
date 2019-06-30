@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Java中的集合与泛型 | Huan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="泛型Java中的泛型（generics）是JDK 5中引入的一个新特性，提供编译时类型安全检测机制，允许在编译时检测非法的类型。平常用到的大多数泛型写的程序都和处理集合有关，虽然泛型也可以用在其他地方，但是它的主要目的还是让我们可以写出有类型安全的集合。 在没有泛型功能之前，集合都写成Object类型，我们可以把任何类型的数据放入ArrayList中，就像ArrayList。 使用泛型后，可以指定">
+<meta name="keywords" content="List,Set,Map">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java中的集合与泛型">
+<meta property="og:url" content="https://huanw415.github.io/2019/06/30/Java中的集合与泛型/index.html">
+<meta property="og:site_name" content="Huan&#39;s Blog">
+<meta property="og:description" content="泛型Java中的泛型（generics）是JDK 5中引入的一个新特性，提供编译时类型安全检测机制，允许在编译时检测非法的类型。平常用到的大多数泛型写的程序都和处理集合有关，虽然泛型也可以用在其他地方，但是它的主要目的还是让我们可以写出有类型安全的集合。 在没有泛型功能之前，集合都写成Object类型，我们可以把任何类型的数据放入ArrayList中，就像ArrayList。 使用泛型后，可以指定">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-30T06:25:30.848Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java中的集合与泛型">
+<meta name="twitter:description" content="泛型Java中的泛型（generics）是JDK 5中引入的一个新特性，提供编译时类型安全检测机制，允许在编译时检测非法的类型。平常用到的大多数泛型写的程序都和处理集合有关，虽然泛型也可以用在其他地方，但是它的主要目的还是让我们可以写出有类型安全的集合。 在没有泛型功能之前，集合都写成Object类型，我们可以把任何类型的数据放入ArrayList中，就像ArrayList。 使用泛型后，可以指定">
+  
+    <link rel="alternate" href="/atom.xml" title="Huan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Huan&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://huanw415.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java中的集合与泛型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/30/Java中的集合与泛型/" class="article-date">
+  <time datetime="2019-06-30T06:15:39.000Z" itemprop="datePublished">2019-06-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java中的集合与泛型
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><p>Java中的泛型（generics）是JDK 5中引入的一个新特性，提供编译时类型安全检测机制，允许在编译时检测非法的类型。平常用到的大多数泛型写的程序都和处理集合有关，虽然泛型也可以用在其他地方，但是它的主要目的还是让我们可以写出有类型安全的集合。</p>
+<p>在没有泛型功能之前，集合都写成Object类型，我们可以把任何类型的数据放入ArrayList中，就像<br>ArrayList<object>。 使用泛型后，可以指定ArrayList中可存储的对象类型。  </object></p>
+<p>泛型可以分为泛型的类和泛型的函数。</p>
+<h2 id="泛型的类"><a href="#泛型的类" class="headerlink" title="泛型的类"></a>泛型的类</h2><p><code>ArrayList</code>就是一个典型的泛型化的类。下面是部分ArrayList的代码，它可分为两个部分：   </p>
+<ol>
+<li>类的声明：在类名<code>ArrayList</code>后加泛型类型参数声明部分<code>E</code>，这个<code>E</code>到时候会在声明和创建时候的的真正类型来提汗。    </li>
+<li>新增元素的方法的声明：仍然可以使用泛型<code>E</code>来指定函数可接受的参数类型。  </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt; implements List&lt;E&gt; ... &#123;</span><br><span class="line">  public boolean add (E o)</span><br><span class="line">  &#123;</span><br><span class="line">    //实现代码...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以我们在使用<code>ArrayList</code>的时候就可以通过下面这种方式得到一个只接受<code>String</code>的List，这里的<code>String</code>会替换上面的<code>E</code>，指定该List可接受的对象类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; thisList = new ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+
+<p><code>E</code> 代表<code>Element</code>，当然也可以用<code>T</code>,可以使用任何合法的Java标识字符串来替代<code>E</code>。除非与集合有关我们用<code>E</code>，其他一般都是用<code>T</code>。   </p>
+<h2 id="泛型的方法"><a href="#泛型的方法" class="headerlink" title="泛型的方法"></a>泛型的方法</h2><h3 id="使用定义在类声明中定义过的类型参数"><a href="#使用定义在类声明中定义过的类型参数" class="headerlink" title="使用定义在类声明中定义过的类型参数"></a>使用定义在类声明中定义过的类型参数</h3><p>下面的<code>add</code>方法中使用的泛型参数类型<code>E</code>就已经在类声明中定义过了，那么该类型<code>E</code>就可以用在类中的任何地方，当类被初始化类型确定后，相应的<code>E</code>会全部被替换成该初始化类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt; implements List&lt;E&gt; ... &#123;</span><br><span class="line">  public boolean add (E o)</span><br><span class="line">  &#123;</span><br><span class="line">    //实现代码...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用未在类声明定义过的类型参数"><a href="#使用未在类声明定义过的类型参数" class="headerlink" title="使用未在类声明定义过的类型参数"></a>使用未在类声明定义过的类型参数</h3><p>比如下面这个函数，使用<code>T</code>作为泛型参数，但是该参数并未出现在上面的类声明中，那么，如果想在类中使用这个泛型参数<code>T</code>作为函数方法，则需要在该函数的返回类型前声明该参数类型<code>T</code>。    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public &lt;T extends Animal&gt; void takeThing(ArrayList&lt;T&gt; list) &#123;...&#125;</span><br><span class="line">```     </span><br><span class="line"></span><br><span class="line">&lt;T extends Animal&gt;表示任何是Animal或者Animal的子类型的ArrayList都是合法的。同样的也可以用&lt;T super Dog&gt; 来指定可接受Dog及其三层父类类型。</span><br><span class="line">这是泛型在多态中的用法，这样的话，不允许在takeThing()中加入任何东西到集合中，只可以访问该集合的元素。  </span><br><span class="line"></span><br><span class="line"># 集合</span><br><span class="line">Java中的集合框架包括两种类型的容器：</span><br><span class="line">1. 集合类型（Collection）：存储元素的集合。Collection接口又有三种子类型：List，set和Queue  </span><br><span class="line">2. 图（Map）：存储键值对映射。     </span><br><span class="line"></span><br><span class="line">任何的集合框架都包括如下内容：</span><br><span class="line">1. 接口：代表集合的抽象数据类型，比如：Collection，List, Map等。</span><br><span class="line">2. 实现类：是集合接口的具体实现，是一种可复用的数据结构。比如ArrayList，LinkedList，HashMap等。</span><br><span class="line">3. 算法：是实现集合接口的对象里的方法执行的一些运算，比如排序和搜索等。这些算法被称为多态，因为不同的类型可能会有不一样的实现。</span><br><span class="line"></span><br><span class="line">List, Set和Map这三种是其中三种较为常用的接口，适用于不同场合。具体的接口定义可参考[BUNOOB.COM](https://www.runoob.com/java/java-collections.html)。</span><br><span class="line">1. List：其中的每个元素都可以知道索引位置，允许重复对象出现，存储有序集合。</span><br><span class="line">2. Set：不需要重复的对象出现，注重独一无二的性质。</span><br><span class="line">3. Map: 使用key-value键值对的方式存储，value可重复，但是key不允许有任何重复。</span><br><span class="line"></span><br><span class="line">## List</span><br><span class="line">`List`的实现由包括`ArrayList`, `LinkedList`, `Vector`等，但其中最常用的实现还是`ArrayList`。</span><br><span class="line">`ArrayList`是一个有序集合，可以使用对集合进行排序，通过调用`Collections.sort`方法。这里有两种不同的`sort`的方法可供使用：</span><br><span class="line"></span><br><span class="line">### sort(List o) 单一参数</span><br><span class="line">该方法表示由List元素上的`compareTo()`来决定顺序，因此元素必须要实现Comparable这个接口。   </span><br><span class="line"></span><br><span class="line">下例中的`Song`实现了`Comparable`接口里的`compareTo`这个方法，由于String类中实现了Comparable接口，该方法内直接调用了`title`中的CompareTo方法，这样`Song`可按照字母顺序升序排列。</span><br></pre></td></tr></table></figure>
+
+<p>Class Song implements Comparable<song> {<br>  String title;<br>  Sting artist;<br>  String rating;</song></p>
+<p>  public int compareTo(Song s){<br>      return title.compareTo(s.getTitle())<br>  }</p>
+<p>  Song(String title, String artist, String rating) {<br>    this.title = title;<br>    this.artist = artist;<br>    this.rating = rating;<br>  }</p>
+<p>  public String getTitle {<br>    return title;<br>  }<br>  …<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### sort(List o, Comparator c) -- 自定义的Comparator</span><br><span class="line">使用此种方法的话，就不会去调用list中的compareTo()方法，而是去使用自制的`Comparator`中的`Compare`方法，也就是说list中的元素不需要实现Comparable。</span><br><span class="line"></span><br><span class="line">还是上面的例子，如果我们不想`Song`按照歌名排序，而想根据`artist`的名字进行排序，此时使用我们自定义的Comparator来实现。</span><br></pre></td></tr></table></figure>
+
+<p>Class ArtistCompare implements Comparator<song> {<br>  public int compare(Song a, Song b){<br>    return a.getArtist().compareTo(b.getArtist());<br>  }<br>}</song></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">然后可以通过调用`sort(List o, Comparator c)`时传入我们自定义的Comparator-ArtistCompare，这样来实现对`songList`按照 `artist`字母升序排列。</span><br></pre></td></tr></table></figure>
+
+<p>ArtistCompare artistCompare = new ArtistCompare();<br>Collections.sort(songList, artistCompare);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## Set</span><br><span class="line">`Set`接口也有多种实现，包括`LinkedHashSet`，`HashSet`等。  </span><br><span class="line"></span><br><span class="line">### 对象相等</span><br><span class="line">`Set`最重要的一个特点就是不允许存储重复的对象，那么对象怎样才算相等呢？这里就是涉及到`引用相等性`和`对象相等性`。</span><br><span class="line">#### 引用相等性</span><br><span class="line">`引用相等性`是指堆上同一对象的多个引用，在这种情况下两个引用是相等的。每个对象都会有`hashCode()`，如果`hashCode()`没有被覆盖的话，默认会返回每个对象特有的序号，而判断两个引用是否相等就可以用`==`来比较变量上的字节组合是否相等，如果引用到的是同一对象，那么字节组合也会相等。</span><br></pre></td></tr></table></figure>
+
+<p>if (a == b) {<br>  //两个引用均指向同一对象<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#### 对象相等性</span><br><span class="line">有时候存在堆上两个不同的对象在意义上是相等的，虽然他们的`hashcode()`不同，但存储的内容完全相同。此时如果想要把他们视为相等的话，必须要覆盖从Object上继承下来的`hashCode()`方法与`equals()`方法。</span><br></pre></td></tr></table></figure>
+
+<p>if (a.equals(b) &amp;&amp; a.hashCode() == b.hashCode()) {<br>  //两个引用均指向同一对象 或者两个对象相等<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">`equals`对于字符串来说是比较两字符串内容，对于非字符串是比较指向的对象是否相同。</span><br><span class="line"></span><br><span class="line">### HashSet</span><br><span class="line">`HashSet`是根据`hashCode()`来判断要加入的对象是否已经存在，如果没有相符的hascode出现，那么HashSet认为新对象还没有出现过，同意将新对象加入HashSet中。但是此种办法并不能判断对象内容相等的情况，而且有时候即使居右相同hashCode()的对象也不一定相同。</span><br><span class="line"></span><br><span class="line">为什么不同对象可能会有相同的hashCode?   </span><br><span class="line">其实HashSet是通过使用hashCode来达成存取速度较快的存储方式。如果你想使用一个对象来找ArrayList中相同对象的话，那么ArrayList将会从投开始找起、但是HashSet找对象就很快，它使用hashCode来寻找符合条件的元素，根据hashCode可以很快的计算出对象所在的位置，而不必一个个寻找。    </span><br><span class="line">hashCode相同而不能保证一定对象相等的原因是，hashCode使用杂凑算法生成，可能多个对象会产生相同的hashCode。所以，hashCode只是用来虽小寻找成本，最后还是要用equals()才能认定是不是真的找到了相同的对象。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### TreeSet</span><br><span class="line">`TreeSet`在防止重复方面跟`HashSet`机制相同，但是它可以保持集合处于有序状态。当使用默认构造函数的时候，它工作起来就像`sort()`一样使用`compareTo()`方法来排序，但是这要求`TreeSet`里的元素必须实现`Comparable`接口。</span><br></pre></td></tr></table></figure>
+
+<p>/*
+调用无参的TreeSet取代HashSet，那么将会使用Song的compareTo()来对对象进行排序，前提是Song已经实现了Comparable接口<br>*/<br>TreeSet<song> songSet = new TreeSet<song>();<br>songSet.addAll(songList);</song></song></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">当然，也可以选择传入`Comparator`给`TreeSet`的构造函数。这样TreeSet将会调用`Comparator`上的`compare`方法来进行排序。</span><br></pre></td></tr></table></figure>
+
+<p>BookCompare bCompare = new BookCompare();<br>TreeSet<book> bookSet = new TreeSet<book>(bCompare);<br>bookSet.add(new Book(‘How cats work’));<br>bookSet.add(new Book(‘FInding Emo’));</book></book></p>
+<pre><code>
+## Map
+`Map`实际上是Key-Value，关键字和值，其中value可以重复，但是不允许有重复的key。虽然Key通常来说都是`String`，但是其实可以使用任何类型的Java的对象作为key，只要不重复即可。</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://huanw415.github.io/2019/06/30/Java中的集合与泛型/" data-id="cjxik9pho0006d4pf491aape0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/List-Set-Map/">List,Set,Map</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/18/数据库的事务/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数据库的事务</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/List-Set-Map/">List,Set,Map</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Transaction/">Transaction</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/List-Set-Map/" style="font-size: 10px;">List,Set,Map</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Transaction/" style="font-size: 10px;">Transaction</a> <a href="/tags/jQuery/" style="font-size: 10px;">jQuery</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/30/Java中的集合与泛型/">Java中的集合与泛型</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/18/数据库的事务/">数据库的事务</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/16/SQL入门/">SQL入门</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/31/jquery-中bind-live-delegate-on事件绑定方法/">jquery 中bind, live, delegate, on事件绑定方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 HuanW<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
